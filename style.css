@@ -1,0 +1,331 @@
+/* 基本重設與字體 */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 導覽列 */
+nav {
+    background-color: #2c3e50;
+    padding: 0 2rem;
+    display: flex;
+}
+nav a {
+    color: white;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 4px solid transparent;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+nav a:hover {
+    background-color: #34495e;
+}
+nav a.active {
+    border-bottom-color: #3498db;
+}
+
+/* 主要內容區 */
+main {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 隱藏非作用中頁面 */
+.page-content {
+    display: none;
+}
+.page-content.active {
+    display: block;
+}
+
+/* 模組容器 (卡片樣式) */
+.module-container {
+    background: #ffffff;
+    border: 1px solid #dfe4ea;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-top: 0;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+}
+h3 {
+    font-size: 1.3rem;
+    color: #34495e;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+/* 報告頁面合併後的 h3 */
+#page-2 h3 {
+    margin-top: 0;
+}
+
+
+/* 表單元素 */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* 確保 padding 不會撐爆寬度 */
+    margin-bottom: 1rem;
+}
+input[type="file"] {
+    padding: 0.5rem;
+}
+
+/* 報告頁面內的T分隔線 */
+.separator {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 2rem 0;
+}
+
+/* 操作工具列 */
+.action-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* [修改] 搜尋列 */
+.search-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem; /* [修改] 調整間距 */
+}
+.search-bar input {
+    flex-grow: 1; /* 讓輸入框佔滿剩餘空間 */
+    margin-bottom: 0;
+}
+.search-bar button {
+    flex-shrink: 0; /* 保持按鈕寬度 */
+    margin-right: 0;
+}
+
+/* [移除] .search-result 樣式 */
+
+
+/* 按鈕小圖示 */
+.icon {
+    margin-right: 0.4rem;
+    font-weight: bold;
+}
+
+/* 按鈕 */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-right: 0.5rem;
+}
+button:hover {
+    background-color: #2980b9;
+}
+button.secondary {
+    background-color: #95a5a6;
+}
+button.secondary:hover {
+    background-color: #7f8c8d;
+}
+button.danger {
+    background-color: #e74c3c;
+}
+button.danger:hover {
+    background-color: #c0392b;
+}
+
+/* 禁用按鈕樣式 */
+button:disabled,
+button:disabled:hover {
+    background-color: #bdc3c7; /* 灰色 */
+    cursor: not-allowed; /* 禁止符號 */
+}
+
+
+/* 防止按鈕在表格中換行 */
+td button {
+    white-space: nowrap;
+}
+
+/* 資料管理列表 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+th, td {
+    border: 1px solid #dfe4ea;
+    padding: 0.8rem 1rem;
+    text-align: left;
+    vertical-align: middle;
+}
+th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+}
+tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+/* 讓表格欄位寬度平均一點 (可選) */
+table th:nth-child(1) { width: 10%; } /* 年度 */
+table th:nth-child(2) { width: 25%; } /* 狀態 */
+table th:nth-child(3) { width: 35%; } /* 功能 */
+table th:nth-child(4) { width: 15%; } /* 報告 */
+table th:nth-child(5) { width: 15%; } /* 刪除 */
+
+
+/* 狀態標籤 */
+.status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.status-success { background-color: #e6f7f0; color: #008a4c; }
+.status-danger { background-color: #fdebec; color: #d92d20; }
+.status-info { background-color: #e6f3fb; color: #2980b9; }
+.status-warning { background-color: #fff8e6; color: #f39c12; }
+
+/* 模組描述 */
+.module-description {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 狀態說明 */
+.status-note {
+     font-size: 0.9rem;
+     color: #777;
+     padding: 1rem;
+     background-color: #f9f9f9;
+     border: 1px dashed #ccc;
+     border-radius: 4px;
+}
+/* SRS 頁面中的 blockquote 樣式 */
+.status-note[style] {
+     border-style: solid !important;
+     margin-top: 1rem !important;
+}
+
+
+/* 彈出式視窗 (Modal) 樣式 */
+.modal-overlay {
+    display: none; /* 預设隱藏 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* 黑色半透明遮罩 */
+    
+    /* 使用 Flex 置中 */
+    display: none; /* 配合 jQuery fadeIn */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px; /* 最大寬度 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s; /* 簡單淡入動畫 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.modal-close:hover,
+.modal-close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+/* 讓 Modal 內的 input 也 100% 寬 */
+.modal-body input[type="number"],
+.modal-body input[type="file"] {
+     width: 100%;
+}
+.modal-body p {
+    margin-top: 0;
+    color: #555;
+}
+
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end; /* 按鈕靠右 */
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f9f9f9;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* 讓 Modal 內的取消按鈕為灰色 */
+.modal-footer button.secondary {
+     background-color: #95a5a6;
+}
+.modal-footer button.secondary:hover {
+     background-color: #7f8c8d;
+}

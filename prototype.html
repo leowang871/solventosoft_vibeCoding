@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案管理雛型 (v1.8)</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <nav>
+        <a href="#page-1" class="nav-link active">資料管理與分析 (模組 1 & 2)</a>
+        <a href="#page-2" class="nav-link">報告產出與檢視 (模組 3)</a>
+        <a href="#page-3" class="nav-link">業務流程 (SRS)</a>
+    </nav>
+
+    <main>
+
+        <section id="page-1" class="page-content active">
+            <h2>資料管理與分析 (模組 1 & 2)</h2>
+            
+            <div class="module-container">
+                <h3>年度資料管理列表</h3>
+
+                <div class="action-bar">
+                    <button id="btn-add-new">
+                        <span class="icon">+</span> 新增
+                    </button>
+                    <button id="btn-trigger-analysis">
+                        <span class="icon">&#x2699;</span> 相似度文字比對
+                    </button>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" id="keyword-search-input" placeholder="輸入關鍵字查詢 (例如: RPA)...">
+                    <button id="btn-keyword-search">查詢</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>年度</th>
+                            <th>目前狀態</th>
+                            <th>功能</th>
+                            <th>報告</th>
+                            <th>刪除</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>115年</td>
+                            <td><span class="status status-success">完成分析</span></td>
+                            <td>
+                                <button class="secondary btn-export-excel">匯出</button>
+                                <button class="secondary btn-re-import">匯入</button>
+                            </td>
+                            <td></td>
+                            <td>
+                                <button class="danger btn-delete">刪除</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>114年</td>
+                            <td><span class="status status-danger">pdf解析失敗</span></td>
+                            <td>
+                                <button class="secondary btn-re-upload">重新上傳</button>
+                            </td>
+                            <td>
+                                <button class="secondary btn-report-error">錯誤報告</button>
+                            </td>
+                            <td>
+                                <button class="danger btn-delete">刪除</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>113年</td>
+                            <td><span class="status status-info">完成上傳</span></td>
+                            <td>
+                                <button class="secondary btn-export-excel">匯出</button>
+                                <button class="secondary btn-re-import">匯入</button>
+                            </td>
+                            <td></td>
+                            <td>
+                                <button class="danger btn-delete">刪除</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>112年</td>
+                            <td><span class="status status-warning">相似度比對分析中...</span></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button class="danger btn-delete">刪除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="status-note">
+                    <b>狀態欄位說明：</b> 系統將追蹤每年度資料的處理狀態，包含：「pdf 轉資料庫」、「pdf解析失敗」、「完成上傳」、「相似度比對分析」、「完成分析」。
+                </p>
+            </div>
+        </section>
+
+        <section id="page-2" class="page-content">
+            <h2>報告產出與檢視 (模組 3)</h2>
+
+            <div class="module-container">
+                <h3>報告產出</h3>
+                
+                <p>點擊下方按鈕，匯出 (模組二) 產生的所有文章比對結果。</p>
+                <button id="btn-export-all-analysis">匯出所有文章比對結果 (Excel)</button>
+
+                <hr class="separator">
+
+                <label for="threshold">比對值 (門檻)：</label>
+                <input type="number" id="threshold" value="0.8" step="0.1" min="0" max="1">
+                
+                <label for="base-path">資料儲存路徑 (基底)：</label>
+                <input type="text" id="base-path" placeholder="例如：D://Report_Files/">
+
+                <label for="template-upload">上傳總表樣板 (Excel)：</label>
+                <input type="file" id="template-upload" accept=".xlsx,.xls">
+
+                <button id="btn-generate-report">開始製作報告</button>
+            </div>
+        </section>
+        
+        <section id="page-3" class="page-content">
+            <h2>業務流程 (SRS v0.7)</h2>
+            <div class="module-container">
+                
+                <h3>1. 模組一：資料匯入與匯出</h3>
+                <p>
+                    <strong>資料匯入：</strong>支援批次 (200+) PDF / Excel 檔案匯入。<br>
+                    匯入作業需在「背景執行」。<br>
+                    上傳時需供使用者自行新增 (輸入) 年分欄位。<br>
+                    系統將對該年度的既有資料執行解析後，再進行「全刪全覆蓋」。<br>
+                    <strong>[待處理]</strong> PDF 讀取與擷取所用的套件選擇。
+
+                </p>
+
+
+                <p>
+                    <strong>錯誤處理 - 全有或全無：</strong>若批次中有任一 PDF 檔案「毀損、無法讀取、或為純圖片」，則整批作業終止，不得寫入資料庫，並回報錯誤檔案。
+                </p>
+                <p>
+                    <strong>Excel 匯出匯回：</strong>使用者可「依所選年度」匯出所有資料。<br>
+                    使用者可在匯出檔上修改後重新匯入（系統需具備依唯一 ID 進行資料更新的能力）。
+                </p>
+                <p>
+                    <strong>狀態欄位：</strong>系統需追蹤並顯示每年度資料的處理狀態，狀態應包含：「pdf 轉資料庫」、「pdf解析失敗」、「完成上傳」、「相似度比對分析」、「完成分析」。
+                </p>
+
+                <hr class="separator">
+
+                <h3>2. 模組二：相似度比對分析</h3>
+                <p>
+                    <strong>批次分析：</strong>使用者可手動觸發「最新年度」vs.「所有歷史資料」的比對。<br>
+                    <strong>比對欄位：</strong> 內容摘要、效益性、應用性、革新性。<br>
+                    <strong>[待處理]</strong> 各欄位的比對權重及演算法，將於後續階段定義。
+                </p>
+                <p>
+                    <strong>儲存結果：</strong>系統需將比對結果（分數 1.0 - 0.0）存入資料庫。<br>
+                    <strong>[待處理]</strong> 儲存結果的詳細「資料庫儲存格式」尚待提供。
+                </p>
+
+                <hr class="separator">
+
+                <h3>3. 模組三：報告產出與檢視</h3>
+                <p>
+                    <strong>線上報告檢視：</strong>系統需提供一新頁面，供匯出 (模組二) 產生的所有文章比對結果。
+                </p>
+                <p>
+                    <strong>最終報告產出介面：</strong> 系統需提供一個功能頁面，包含三個輸入項：<br>
+                    1. 比對值 (門檻): 使用者輸入 (例如：0.8)。<br>
+                    2. 資料儲存路徑 (基底): 使用者輸入 (例如：D://Report_Files/)。<br>
+                    3. 總表上傳: 使用者上傳業務已部分填寫的 Excel 總表。
+                </p>
+                <p>
+                    <strong>回填規則 (Hyperlink)：</strong> 依據 總表.xlsx 樣板，系統需針對總表中的每一筆資料，自動找出比對分數 Top 3 的結果，並回填總共 3 個欄位（類似案件1、類似案件2、類似案件3）。<br>
+                    <strong>關鍵邏輯：</strong> 這 3 個儲存格均需為「超連結 (Hyperlink)」。<br>
+                    <strong>超連結顯示文字：</strong> 應為 Top 3 案件的「案件名稱」。<br>
+                    <strong>超連結位址：</strong> 應為 Top 3 案件的「檔案路徑」，且此路徑需遵循 (B) 規則。
+                </p>
+                <p>
+                    <strong>路徑規則 (B)：</strong> 系統需將「原始路徑」的根目錄，替換為使用者輸入的「基底路徑」。<br>
+                    <blockquote class="status-note" style="margin-top: 1rem; border-style: solid;">
+                        <strong>範例：</strong><br>
+                        原始路徑：C:/System_Data/Archive/2024/file_A.pdf<br>
+                        輸入基底：D://Report_Files/<br>
+                        產出路徑 (超連結位址)： D://Report_Files/2024/file_A.pdf<br>
+                    </blockquote>
+                <strong>[待處理]</strong> 超連結顯示文字規則待PM詢問。
+
+                </p>
+                <p>
+                    <strong>產出：</strong> 系統將這份填寫完整的 Excel 報告，提供給使用者下載。
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>新增</h3>
+                <span class="modal-close" id="btn-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p style="margin-top:0; color:#555;">(展示說明：因瀏覽器安全限制，無法預選檔案，請手動選擇。)</p>
+                
+                <label for="import-year">請輸入年份：</label>
+                <input type="number" id="import-year" placeholder="例如：115" value="115">
+                
+                <label for="file-upload-modal">選擇檔案 (支援 PDF / Excel 批次上傳)：</label>
+                <input type="file" id="file-upload-modal" multiple accept=".pdf,.xlsx,.xls">
+            </div>
+            <div class="modal-footer">
+                <button class="secondary" id="btn-modal-cancel">取消</button>
+                <button id="btn-upload" disabled>開始上傳 (背景執行)</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
